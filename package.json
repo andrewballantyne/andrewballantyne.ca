@@ -1,0 +1,11 @@
+{
+  "name": "andrewballantyne.ca",
+  "version": "0.0.1",
+  "dependencies": {
+    "bower": "*",
+    "grunt": "*",
+    "grunt-cli": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-copy": "*"
+  }
+}

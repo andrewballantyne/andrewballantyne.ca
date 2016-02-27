@@ -1,0 +1,45 @@
+body {
+  min-width: 800px; }
+  body .glyphiconImage {
+    height: 18px; }
+  body header h1 {
+    padding-left: 10px; }
+  body .content-body {
+    margin-bottom: 75px; }
+    body .content-body .contentNav {
+      float: left;
+      padding: 10px; }
+      body .content-body .contentNav .nav {
+        width: 200px; }
+    body .content-body .page {
+      display: none;
+      margin-left: 225px;
+      margin-right: 25px;
+      padding: 10px; }
+      body .content-body .page .subPageHeader {
+        margin-top: 0; }
+      body .content-body .page .contentHeader {
+        font-weight: bold;
+        margin-top: 20px; }
+      body .content-body .page ul.contentBulletList li:first-letter {
+        text-transform: uppercase; }
+    body .content-body .page.active {
+      display: block; }
+  body footer {
+    background-color: #ddd;
+    border-top: 1px solid #aaa;
+    bottom: 0;
+    left: 0;
+    padding: 5px;
+    position: fixed;
+    text-align: center;
+    width: 100%; }
+    body footer .siteMap .subNav {
+      list-style: none;
+      padding: 0; }
+      body footer .siteMap .subNav .navItem {
+        display: inline-block; }
+      body footer .siteMap .subNav .navItem:before {
+        content: ' | '; }
+      body footer .siteMap .subNav .navItem:first-child:before {
+        content: ''; }

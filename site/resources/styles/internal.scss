@@ -1,0 +1,79 @@
+body {
+  min-width: 800px;
+
+  .glyphiconImage {
+    height: 18px;
+  }
+
+  header {
+    h1 {
+      padding-left: 10px;
+    }
+  }
+
+  .content-body {
+    margin-bottom: 75px;
+
+    .contentNav {
+      float:left;
+      padding: 10px;
+
+      .nav {
+        width: 200px;
+      }
+    }
+    .page {
+      display: none;
+      margin-left: 225px;
+      margin-right: 25px;
+      padding: 10px;
+
+      .subPageHeader {
+        margin-top: 0;
+      }
+
+      .contentHeader {
+        font-weight: bold;
+        margin-top: 20px;
+      }
+
+      ul.contentBulletList {
+        li:first-letter {
+          text-transform: uppercase;
+        }
+      }
+    }
+    // temporary active class to help with initial load; JS should remove this once it's hooked in
+    .page.active {
+      display: block;
+    }
+  }
+
+  footer {
+    background-color: #ddd;
+    border-top: 1px solid #aaa;
+    bottom: 0;
+    left: 0;
+    padding: 5px;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+
+    .siteMap {
+      .subNav {
+        list-style: none;
+        padding: 0;
+
+        .navItem {
+          display: inline-block;
+        }
+        .navItem:before {
+          content: ' | ';
+        }
+        .navItem:first-child:before {
+          content: '';
+        }
+      }
+    }
+  }
+}
