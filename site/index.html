@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Andrew Ballantyne - JavaScript Developer</title>
+
   <script type="text/javascript" src="resources/scripts/external.min.js"></script>
   <script type="text/javascript" src="resources/scripts/internal.js"></script>
 
@@ -22,7 +25,7 @@
     <em>requires</em> JavaScript to run. See more below under 'A few notes about this site'.</div>
 </noscript>
 
-<div class="content-body">
+<div class="contentBody">
   <div class="contentNav">
     <ul id="mainNav" class="nav nav-pills nav-stacked">
       <li id="homeNavItem" class="active"><a href="#home">Home</a></li>
@@ -79,17 +82,13 @@
     </p>
 
     <nav id="exampleNav">
-      <button class="btn btn-default" data-content="spaceExample">
-        <strong>Solar System</strong><br />
-        <small>Predicable rotation</small>
-      </button>
-      <button class="btn btn-default" data-content="comicExample">
-        <strong>A Comic Viewer</strong><br />
-        <small>Pass-time meets laziness</small>
-      </button>
       <button class="btn btn-default" data-content="orgChartExample">
         <strong>Html5 Org Chart</strong><br />
         <small>Canvas professionalized</small>
+      </button>
+      <button class="btn btn-default" data-content="spaceExample" id="spaceExampleBtn">
+        <strong>Solar System</strong><br />
+        <small>Predicable rotation</small>
       </button>
       <button class="btn btn-default" data-content="audioPlayerExample">
         <strong>A Flash Audio Player</strong><br />
@@ -99,11 +98,16 @@
         <strong>City Councilor Site</strong><br />
         <small>Bring change: <span class="glyphicon glyphicon-ok"></span></small>
       </button>
+      <button class="btn btn-default" data-content="comicExample">
+        <strong>A Comic Viewer</strong><br />
+        <small>Pass-time meets laziness</small>
+      </button>
     </nav>
 
     <div id="spaceExample" class="exampleItem">
-      <span class="date">Jan 2012 - Feb 2012</span>
+      <span class="dateRight BIG_SCREENS_ONLY">Jan 2012 - Feb 2012</span>
       <h4 class="contentHeader">Solar System <small>Predicable rotation</small></h4>
+      <span class="dateUnder SMALL_SCREENS_ONLY">Jan 2012 - Feb 2012</span>
       <div class="exampleDetails">
         <div class="exampleStats">
           <span class="technologies"><span class="prefix">Using:</span> HTML5 Canvas - Traditional Object Oriented (OO) JavaScript</span>
@@ -119,8 +123,9 @@
     </div>
 
     <div id="comicExample" class="exampleItem">
-      <span class="date">Nov 11th, 2009 - Dec 3rd, 2009</span>
+      <span class="dateRight BIG_SCREENS_ONLY">Nov 11th, 2009 - Dec 3rd, 2009</span>
       <h4 class="contentHeader">A Comic Viewer <small>Pass-time meets laziness</small></h4>
+      <span class="dateUnder SMALL_SCREENS_ONLY">Nov 11th, 2009 - Dec 3rd, 2009</span>
       <div class="exampleDetails">
         <div class="exampleStats">
           <span class="technologies"><span class="prefix">Using:</span> HTML and Javascript</span>
@@ -132,14 +137,15 @@
     </div>
 
     <div id="orgChartExample" class="exampleItem">
-      <span class="date">Jul 15th, 2012 - Oct 5th, 2012</span>
+      <span class="dateRight BIG_SCREENS_ONLY">Jul 15th, 2012 - Oct 5th, 2012</span>
       <h4 class="contentHeader">Html5 Org Chart <small>Canvas professionalized</small></h4>
+      <span class="dateUnder SMALL_SCREENS_ONLY">Jul 15th, 2012 - Oct 5th, 2012</span>
       <div class="exampleDetails">
         <div class="exampleStats">
           <span class="technologies"><span class="prefix">Using:</span> HTML5 Canvas - Traditional Object Oriented (OO) JavaScript</span>
         </div>
         <p>Halogen Software ran a program they dubbed Leonardo Days; it was named after Leonardo da Vinci. The goal was to allow developers, QA and anyone really from Product Development to use half of a Friday every two weeks to work on any innovative idea they wanted, as long as it related to the main projects. This is similar to 'Google Days', implemented by Google.</p>
-        <p>There was a need for an Org Chart to be created for the primary product in the coming year, so I decided to prototype it. Now HTML5 Canvas would 'never' (not within this decade at least) be able to be used in Halogen due to customer restrictions on browsers available, but I was allowed to pick my own technology and I was recently interested in HTML5 Canvas (after coming off of the <a href="#spaceExample">Space example</a> I noted above), so it seemed to be an easy choice.</p>
+        <p>There was a need for an Org Chart to be created for the primary product in the coming year, so I decided to prototype it. Now HTML5 Canvas would 'never' (not within this decade at least) be able to be used in Halogen due to customer restrictions on browsers available, but I was allowed to pick my own technology and I was recently interested in HTML5 Canvas (after coming off of the <a id="openSpaceExample" href="#examples">Space example</a> I noted above), so it seemed to be an easy choice.</p>
         <p>The project's main features was an expandable and collapsible series of nodes that would build into an Organization Chart. There was a number under that indicated how many bubbles (or people) were directly reporting to this individual. I pulled the information in via an array, since I was unable to have the proper time to connect it to the application. I made one major performance feature, which was to disable all rendering code and 'processing' code for any element that was fully off the screen. This allowed me to skip vast numbers of not visible bubbles.</p>
         <p>This example was entirely built from the ground up using the same (but improved) structure I used in the Solar Example Example.</p>
         <p class="exampleLink disabled">Unfortunately no link is available at this time.</p>
@@ -147,8 +153,9 @@
     </div>
 
     <div id="audioPlayerExample" class="exampleItem">
-      <span class="date">Apr 20th, 2011 - Jul 7th, 2011</span>
+      <span class="dateRight BIG_SCREENS_ONLY">Apr 20th, 2011 - Jul 7th, 2011</span>
       <h4 class="contentHeader">A Flash Audio Player <small>Simple but "noice"</small></h4>
+      <span class="dateUnder SMALL_SCREENS_ONLY">Apr 20th, 2011 - Jul 7th, 2011</span>
       <div class="exampleDetails">
         <div class="exampleStats">
           <span class="technologies"><span class="prefix">Using:</span> Flash - Actionscript 3</span>
@@ -160,8 +167,9 @@
     </div>
 
     <div id="politicalExample" class="exampleItem">
-      <span class="date">May 27th, 2010 - Sept 10th, 2010</span>
+      <span class="dateRight BIG_SCREENS_ONLY">May 27th, 2010 - Sept 10th, 2010</span>
       <h4 class="contentHeader">City Councilor Site <small>Bring change: <span class="glyphicon glyphicon-ok"></span></small></h4>
+      <span class="dateUnder SMALL_SCREENS_ONLY">May 27th, 2010 - Sept 10th, 2010</span>
       <div class="exampleDetails">
         <div class="exampleStats">
           <span class="technologies"><span class="prefix">Using:</span> HTML, CSS, Javascript and PHP with MySQL Database Connectivity</span>

@@ -1,115 +1,135 @@
-body {
-  min-width: 800px; }
-  body .glyphiconImage {
-    height: 18px; }
-  body .externalLink {
-    display: inline-block;
-    font-style: italic; }
-  body .floatClear {
-    clear: both; }
-  body header h1 {
-    padding-left: 10px; }
-  body .content-body {
-    margin-bottom: 100px; }
-    body .content-body .contentNav {
-      float: left;
-      padding: 10px; }
-      body .content-body .contentNav .nav {
-        width: 200px; }
-    body .content-body .page {
-      display: none;
-      margin-left: 225px;
-      margin-right: 25px;
-      padding: 10px; }
-      body .content-body .page .subPageHeader {
-        margin-top: 0; }
-      body .content-body .page .contentHeader {
-        font-weight: bold;
-        margin-top: 20px; }
-      body .content-body .page .contentImage {
-        padding: 5px; }
-      body .content-body .page .contentImage.left {
-        float: left; }
-      body .content-body .page .contentImage.right {
-        float: right; }
-      body .content-body .page ul.contentBulletList li:first-letter {
-        text-transform: uppercase; }
-    body .content-body .page.active {
-      display: block; }
-    body .content-body #examples #exampleNav button {
-      outline: none; }
-    body .content-body #examples .exampleItem {
-      display: none; }
-      body .content-body #examples .exampleItem .date {
-        float: right;
-        font-style: italic;
-        padding: 0 10px; }
-      body .content-body #examples .exampleItem .exampleDetails {
-        padding: 0 10px; }
-        body .content-body #examples .exampleItem .exampleDetails .exampleStats .technologies {
-          padding-left: 10px; }
-          body .content-body #examples .exampleItem .exampleDetails .exampleStats .technologies .prefix {
-            font-weight: bold; }
-        body .content-body #examples .exampleItem .exampleDetails .update {
-          border-left: 3px solid #aaa;
-          padding-left: 5px;
-          margin-left: 10px; }
-          body .content-body #examples .exampleItem .exampleDetails .update .updateDate {
-            font-weight: bold; }
-        body .content-body #examples .exampleItem .exampleDetails .disclaimer {
-          font-style: italic; }
-        body .content-body #examples .exampleItem .exampleDetails .exampleLink {
+body .BIG_SCREENS_ONLY {
+  display: block; }
+body .SMALL_SCREENS_ONLY {
+  display: none; }
+body .glyphiconImage {
+  height: 18px; }
+body .externalLink {
+  display: inline-block;
+  font-style: italic; }
+body .floatClear {
+  clear: both; }
+body header h1 {
+  padding-left: 10px; }
+body .contentBody {
+  margin-bottom: 100px; }
+  body .contentBody .contentNav {
+    display: block;
+    float: left;
+    padding: 10px; }
+    body .contentBody .contentNav .nav {
+      width: 200px; }
+  body .contentBody .page {
+    display: none;
+    margin-left: 225px;
+    margin-right: 25px;
+    padding: 10px; }
+    body .contentBody .page .subPageHeader {
+      margin-top: 0; }
+      body .contentBody .page .subPageHeader small {
+        display: inline; }
+    body .contentBody .page .contentHeader {
+      font-weight: bold;
+      margin-top: 20px; }
+    body .contentBody .page .contentImage {
+      padding: 5px; }
+    body .contentBody .page .contentImage.left {
+      float: left; }
+    body .contentBody .page .contentImage.right {
+      float: right; }
+    body .contentBody .page ul.contentBulletList li:first-letter {
+      text-transform: uppercase; }
+  body .contentBody .page.active {
+    display: block; }
+  body .contentBody #examples #exampleNav button {
+    margin: 2px;
+    outline: none; }
+  body .contentBody #examples .exampleItem {
+    display: none; }
+    body .contentBody #examples .exampleItem .dateRight, body .contentBody #examples .exampleItem .dateUnder {
+      font-style: italic; }
+    body .contentBody #examples .exampleItem .dateRight {
+      float: right;
+      padding: 0 10px; }
+    body .contentBody #examples .exampleItem .exampleDetails {
+      padding: 0 10px; }
+      body .contentBody #examples .exampleItem .exampleDetails .exampleStats .technologies {
+        padding-left: 10px; }
+        body .contentBody #examples .exampleItem .exampleDetails .exampleStats .technologies .prefix {
           font-weight: bold; }
-    body .content-body #examples .exampleItem.startingText {
-      display: block;
-      padding: 10px; }
-    body .content-body #about .workHistory {
-      margin: 0; }
-      body .content-body #about .workHistory .workDataPoint {
-        list-style: none;
-        margin: 0;
-        padding: 5px; }
-        body .content-body #about .workHistory .workDataPoint .name {
-          display: block;
-          font-size: 125%;
-          font-weight: bold;
-          margin-left: -20px; }
-          body .content-body #about .workHistory .workDataPoint .name .title {
-            display: inline-block;
-            width: 185px; }
-          body .content-body #about .workHistory .workDataPoint .name .classification {
-            color: #888;
-            font-size: 75%; }
-          body .content-body #about .workHistory .workDataPoint .name .classification:before {
-            content: '('; }
-          body .content-body #about .workHistory .workDataPoint .name .classification:after {
-            content: ')'; }
-        body .content-body #about .workHistory .workDataPoint .role {
-          display: inline-block;
+      body .contentBody #examples .exampleItem .exampleDetails .update {
+        border-left: 3px solid #aaa;
+        padding-left: 5px;
+        margin-left: 10px; }
+        body .contentBody #examples .exampleItem .exampleDetails .update .updateDate {
           font-weight: bold; }
-        body .content-body #about .workHistory .workDataPoint .dates {
-          display: inline-block;
-          color: #888;
-          padding: 0 10px; }
-        body .content-body #about .workHistory .workDataPoint .technologies {
-          display: block; }
-        body .content-body #about .workHistory .workDataPoint .libraries {
-          display: block; }
-  body footer {
-    background-color: #ddd;
-    border-top: 1px solid #aaa;
-    bottom: 0;
-    left: 0;
-    padding: 5px;
-    position: fixed;
-    text-align: center;
-    width: 100%; }
-    body footer .siteMap .subNav {
+      body .contentBody #examples .exampleItem .exampleDetails .disclaimer {
+        font-style: italic; }
+      body .contentBody #examples .exampleItem .exampleDetails .exampleLink {
+        font-weight: bold; }
+  body .contentBody #examples .exampleItem.startingText {
+    display: block;
+    padding: 10px; }
+  body .contentBody #about .workHistory {
+    margin: 0; }
+    body .contentBody #about .workHistory .workDataPoint {
       list-style: none;
-      padding: 0; }
-      body footer .siteMap .subNav .navItem {
-        display: inline-block; }
-      body footer .siteMap .subNav .navItem:before {
-        content: ' | '; }
-      body footer .siteMap .subNav .navItem:first-child:before {
-        content: ''; }
+      margin: 0;
+      padding: 5px; }
+      body .contentBody #about .workHistory .workDataPoint .name {
+        display: block;
+        font-size: 125%;
+        font-weight: bold;
+        margin-left: -20px; }
+        body .contentBody #about .workHistory .workDataPoint .name .title {
+          display: inline-block;
+          width: 185px; }
+        body .contentBody #about .workHistory .workDataPoint .name .classification {
+          color: #888;
+          font-size: 75%; }
+        body .contentBody #about .workHistory .workDataPoint .name .classification:before {
+          content: '('; }
+        body .contentBody #about .workHistory .workDataPoint .name .classification:after {
+          content: ')'; }
+      body .contentBody #about .workHistory .workDataPoint .role {
+        display: inline-block;
+        font-weight: bold; }
+      body .contentBody #about .workHistory .workDataPoint .dates {
+        display: inline-block;
+        color: #888;
+        padding: 0 10px; }
+      body .contentBody #about .workHistory .workDataPoint .technologies {
+        display: block; }
+      body .contentBody #about .workHistory .workDataPoint .libraries {
+        display: block; }
+body footer {
+  background-color: #ddd;
+  border-top: 1px solid #aaa;
+  bottom: 0;
+  left: 0;
+  padding: 5px;
+  position: fixed;
+  text-align: center;
+  width: 100%; }
+  body footer .siteMap .subNav {
+    list-style: none;
+    padding: 0; }
+    body footer .siteMap .subNav .navItem {
+      display: inline-block; }
+    body footer .siteMap .subNav .navItem:before {
+      content: ' | '; }
+    body footer .siteMap .subNav .navItem:first-child:before {
+      content: ''; }
+
+@media screen and (max-width: 800px) {
+  body .BIG_SCREENS_ONLY {
+    display: none; }
+  body .SMALL_SCREENS_ONLY {
+    display: block; }
+  body .contentBody .contentNav {
+    display: none; }
+  body .contentBody .page {
+    margin-left: 10px;
+    margin-right: 10px; }
+    body .contentBody .page .subPageHeader small {
+      display: block; } }

@@ -1,5 +1,12 @@
+// Default (desktop)
 body {
-  min-width: 800px;
+  // Media-only classes
+  .BIG_SCREENS_ONLY {
+    display: block;
+  }
+  .SMALL_SCREENS_ONLY {
+    display: none;
+  }
 
   .glyphiconImage {
     height: 18px;
@@ -18,11 +25,12 @@ body {
     }
   }
 
-  .content-body {
+  .contentBody {
     margin-bottom: 100px;
 
     .contentNav {
-      float:left;
+      display: block;
+      float: left;
       padding: 10px;
 
       .nav {
@@ -37,6 +45,10 @@ body {
 
       .subPageHeader {
         margin-top: 0;
+
+        small {
+          display: inline;
+        }
       }
 
       .contentHeader {
@@ -67,16 +79,21 @@ body {
 
     #examples {
       #exampleNav button {
+        margin: 2px;
         outline: none;
       }
 
       .exampleItem {
         display: none;
 
-        .date {
-          float: right;
+        .dateRight, .dateUnder {
           font-style: italic;
+        }
+        .dateRight {
+          float: right;
           padding: 0 10px;
+        }
+        .dateUnder {
         }
 
         .exampleDetails {
@@ -191,6 +208,35 @@ body {
         }
         .navItem:first-child:before {
           content: '';
+        }
+      }
+    }
+  }
+}
+
+// Smaller devices (ie. mobile)
+@media screen and (max-width: 800px) {
+  body {
+    .BIG_SCREENS_ONLY {
+      display: none;
+    }
+    .SMALL_SCREENS_ONLY {
+      display: block;
+    }
+
+    .contentBody {
+      .contentNav {
+        display: none;
+      }
+
+      .page {
+        margin-left: 10px;
+        margin-right: 10px;
+
+        .subPageHeader {
+          small {
+            display: block;
+          }
         }
       }
     }

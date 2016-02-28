@@ -53,7 +53,7 @@ _data.window.on('load', function () {
 
 
 function setupVariables() {
-  _data.content = $('.content-body');
+  _data.content = $('.contentBody');
 
   _data.navigation.mainNavContainer = _data.content.find('#mainNav');
   _data.navigation.all = _data.navigation.mainNavContainer.children();
@@ -121,6 +121,11 @@ function setupNavigation() {
       console.error("Error finding nav to update");
     }
   }
+
+  // Direct-to Space Example
+  $('#openSpaceExample').on('click', function () {
+    $('#spaceExampleBtn').click();
+  });
 }
 
 function setupExamples() {
