@@ -3,7 +3,10 @@ body {
   body .glyphiconImage {
     height: 18px; }
   body .externalLink {
+    display: inline-block;
     font-style: italic; }
+  body .floatClear {
+    clear: both; }
   body header h1 {
     padding-left: 10px; }
   body .content-body {
@@ -23,6 +26,12 @@ body {
       body .content-body .page .contentHeader {
         font-weight: bold;
         margin-top: 20px; }
+      body .content-body .page .contentImage {
+        padding: 5px; }
+      body .content-body .page .contentImage.left {
+        float: left; }
+      body .content-body .page .contentImage.right {
+        float: right; }
       body .content-body .page ul.contentBulletList li:first-letter {
         text-transform: uppercase; }
     body .content-body .page.active {
@@ -51,6 +60,9 @@ body {
           font-style: italic; }
         body .content-body #examples .exampleItem .exampleDetails .exampleLink {
           font-weight: bold; }
+    body .content-body #examples .exampleItem.startingText {
+      display: block;
+      padding: 10px; }
     body .content-body #about .workHistory {
       margin: 0; }
       body .content-body #about .workHistory .workDataPoint {
