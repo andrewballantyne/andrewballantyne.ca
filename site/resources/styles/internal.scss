@@ -4,6 +4,9 @@ body {
   .glyphiconImage {
     height: 18px;
   }
+  .externalLink {
+    font-style: italic;
+  }
 
   header {
     h1 {
@@ -12,7 +15,7 @@ body {
   }
 
   .content-body {
-    margin-bottom: 75px;
+    margin-bottom: 100px;
 
     .contentNav {
       float:left;
@@ -46,6 +49,103 @@ body {
     // temporary active class to help with initial load; JS should remove this once it's hooked in
     .page.active {
       display: block;
+    }
+
+    #examples {
+      #exampleNav button {
+        outline: none;
+      }
+
+      .exampleItem {
+        display: none;
+
+        .date {
+          float: right;
+          font-style: italic;
+          padding: 0 10px;
+        }
+
+        .exampleDetails {
+          padding: 0 10px;
+
+          .exampleStats {
+            .technologies {
+              padding-left: 10px;
+
+              .prefix {
+                font-weight: bold;
+              }
+            }
+          }
+          .update {
+            border-left: 3px solid #aaa;
+            padding-left: 5px;
+            margin-left: 10px;
+
+            .updateDate {
+              font-weight: bold;
+            }
+          }
+          .disclaimer {
+            font-style: italic;
+          }
+          .exampleLink {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    #about {
+      .workHistory {
+        margin: 0;
+
+        .workDataPoint {
+          list-style: none;
+          margin: 0;
+          padding: 5px;
+
+          .name {
+            display: block;
+            font-size: 125%;
+            font-weight: bold;
+            margin-left: -20px;
+
+            .title {
+              display: inline-block;
+              width: 185px;
+            }
+
+            .classification {
+              color: #888;
+              font-size: 75%;
+            }
+            .classification:before {
+              content: '(';
+            }
+            .classification:after {
+              content: ')';
+            }
+          }
+          .role {
+            display: inline-block;
+            font-weight: bold;
+          }
+          .dates {
+            display: inline-block;
+            color: #888;
+            padding: 0 10px;
+          }
+          .technologies {
+            display: block;
+
+          }
+          .libraries {
+            display: block;
+
+          }
+        }
+      }
     }
   }
 

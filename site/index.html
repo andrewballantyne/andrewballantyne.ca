@@ -32,6 +32,7 @@
       <li id="contactNavItem"><a href="#contact">Contact</a></li>
     </ul>
   </div>
+
   <div class="page active" id="home">
     <h2 class="subPageHeader">Welcome</h2>
     <p>This is AndrewBallantyne.ca, a personal website for an Ottawa JavaScript Developer.</p>
@@ -63,18 +64,183 @@
     <p>Technically speaking, this site uses jQuery and Bootstrap to style and manage the link/hash navigation. To set it up, it also made
     use of npm package.json, bower.json, and a gruntfile.js. If you wish to see the source, I have posted it to
       <img src="resources/images/glyphicons-social-22-github.png" class="glyphiconImage" title="Used with license permission from glyphicons.com" />
-      <a href="http://www.github.com">GitHub <span class="glyphicon glyphicon-new-window"></span></a>.
+      <a href="https://github.com/ballantyno/andrewballantyne.ca" class="externalLink" target="_blank">GitHub <span class="glyphicon glyphicon-new-window"></span></a>.
     </p>
   </div>
 
   <div class="page" id="examples">
     <h2 class="subPageHeader">Technical Examples</h2>
-    <p>Coming Soon</p>
+    <p>Not all my examples are posted to my <a href="https://github.com/ballantyno/" class="externalLink" target="_blank">GitHub
+      <span class="glyphicon glyphicon-new-window"></span></a> but feel free to explore what has been uploaded.</p>
+
+    <nav id="exampleNav">
+      <button class="btn btn-default" data-content="spaceExample">
+        <strong>Solar System</strong><br />
+        <small>Predicable rotation</small>
+      </button>
+      <button class="btn btn-default" data-content="comicExample">
+        <strong>A Comic Viewer</strong><br />
+        <small>Pass-time meets laziness</small>
+      </button>
+      <button class="btn btn-default" data-content="orgChartExample">
+        <strong>Html5 Org Chart</strong><br />
+        <small>Canvas professionalized</small>
+      </button>
+      <button class="btn btn-default" data-content="audioPlayerExample">
+        <strong>A Flash Audio Player</strong><br />
+        <small>Simple but "noice"</small>
+      </button>
+      <button class="btn btn-default" data-content="politicalExample">
+        <strong>City Councilor Site</strong><br />
+        <small>Bring change: <span class="glyphicon glyphicon-ok"></span></small>
+      </button>
+    </nav>
+
+    <div id="spaceExample" class="exampleItem">
+      <span class="date">Jan 2012 - Feb 2012</span>
+      <h4 class="contentHeader">Solar System <small>Predicable rotation</small></h4>
+      <div class="exampleDetails">
+        <div class="exampleStats">
+          <span class="technologies"><span class="prefix">Using:</span> HTML5 Canvas - Traditional Object Oriented (OO) JavaScript</span>
+        </div>
+        <p>I decided to create this example in my spare time to explore the HTML5 Canvas tag. While using this new tag, I would be able to graphically create and manipulate each pixel; something that HTML is not known for. While working for the University of Windsor, I was surrounded by Flash and Adobe products. One of our future plans was to allow access to our web content via mobile devices, such as an iPhone. Unfortunately, since the Adobe Flash Player is not available for any Apple mobile device, the HTML5 Canvas route showed some promise. My desire with this example was to take what I have learned in my desktop programing examples and see if HTML5 Canvas could replicate them.</p>
+        <p>For this example I almost exclusively used Javascript, with very little HTML and CSS to format the canvas tag and any other text that appears. The architecture of my project heavily relied on the use of Javascript prototypes "classes" and in some cases Javascript Inheritance, through prototypes. I made use of several event handlers, such as mouse down, mouse up, mouse move, and mouse scroll to make the mouse feel at home. I used a timer to control the animation and it runs at 20 frames a second.</p>
+        <p class="update"><span class="updateDate">Update (Feb 6th, 2012):</span> Images have been added to spruce up the example.</p>
+        <p class="update"><span class="updateDate">Update (Feb 8th, 2012):</span> Now preloads images for a smooth start.</p>
+        <p class="update"><span class="updateDate">Update (May 1st, 2014):</span> Slight CSS updates to match with this site.</p>
+        <p class="disclaimer">Warning: In order to view this example you will need to have a current browser, such as FF 3.6+, IE 9, or an equivalent browser.</p>
+        <p class="exampleLink"><a href="examples/space/" target="_blank">Explore this example</a></p>
+      </div>
+    </div>
+
+    <div id="comicExample" class="exampleItem">
+      <span class="date">Nov 11th, 2009 - Dec 3rd, 2009</span>
+      <h4 class="contentHeader">A Comic Viewer <small>Pass-time meets laziness</small></h4>
+      <div class="exampleDetails">
+        <div class="exampleStats">
+          <span class="technologies"><span class="prefix">Using:</span> HTML and Javascript</span>
+        </div>
+        <p>On March 1st, 2009 one of the web comics I was reading started up a Sunday only comic, which differed from the standard Monday to Saturday comics. This comic showed an origin story of the main character, which is often shown in a lighthearted manner.</p>
+        <p>The web page was designed using Javascript and very little HTML. There was an assumption that every Sunday there would be a special comic, and by that assumption calculate how many Sunday's have happened since March 1st, 2009. With that number, a simple interface was design to allow you to navigate through all those dates and show each comic. The goal was to design a minimalistic user interface, so the focus would be on the comic. A simple cookie system was added to hold onto your comic number, to allow quick returns.</p>
+        <p class="exampleLink disabled">A once working page, but has been broken due to changes on the host site.</p>
+      </div>
+    </div>
+
+    <div id="orgChartExample" class="exampleItem">
+      <span class="date">Jul 15th, 2012 - Oct 5th, 2012</span>
+      <h4 class="contentHeader">Html5 Org Chart <small>Canvas professionalized</small></h4>
+      <div class="exampleDetails">
+        <div class="exampleStats">
+          <span class="technologies"><span class="prefix">Using:</span> HTML5 Canvas - Traditional Object Oriented (OO) JavaScript</span>
+        </div>
+        <p>Halogen Software ran a program they dubbed Leonardo Days; it was named after Leonardo da Vinci. The goal was to allow developers, QA and anyone really from Product Development to use half of a Friday every two weeks to work on any innovative idea they wanted, as long as it related to the main projects. This is similar to 'Google Days', implemented by Google.</p>
+        <p>There was a need for an Org Chart to be created for the primary product in the coming year, so I decided to prototype it. Now HTML5 Canvas would 'never' (not within this decade at least) be able to be used in Halogen due to customer restrictions on browsers available, but I was allowed to pick my own technology and I was recently interested in HTML5 Canvas (after coming off of the <a href="#spaceExample">Space example</a> I noted above), so it seemed to be an easy choice.</p>
+        <p>The project's main features was an expandable and collapsible series of nodes that would build into an Organization Chart. There was a number under that indicated how many bubbles (or people) were directly reporting to this individual. I pulled the information in via an array, since I was unable to have the proper time to connect it to the application. I made one major performance feature, which was to disable all rendering code and 'processing' code for any element that was fully off the screen. This allowed me to skip vast numbers of not visible bubbles.</p>
+        <p>This example was entirely built from the ground up using the same (but improved) structure I used in the Solar Example Example.</p>
+        <p class="exampleLink disabled">Unfortunately no link is available at this time.</p>
+      </div>
+    </div>
+
+    <div id="audioPlayerExample" class="exampleItem">
+      <span class="date">Apr 20th, 2011 - Jul 7th, 2011</span>
+      <h4 class="contentHeader">A Flash Audio Player <small>Simple but "noice"</small></h4>
+      <div class="exampleDetails">
+        <div class="exampleStats">
+          <span class="technologies"><span class="prefix">Using:</span> Flash - Actionscript 3</span>
+        </div>
+        <p>While working for the University of Windsor creating content for eLearning Ontario, our biggest hurdle was our content was too strongly reliant on reading. So a trial course was put together, that would have a teacher narrate the entire course. With all these audio files, we needed a player to play these audio files.</p>
+        <p>I created a player in Flash from the ground up, completely creating all the controls. I was directed on a style by my boss, but design and functionality of the player was created by me. Graphically I make the background transparent so it could be used in any course (which all had their own colour code), as well as I added a drop shadow to make the player graphically more pleasing. In this example, I have created a sandbox to that will allow you to change the background of the HTML page that is behind the player, to show it's true transparency. The test file I was using was only 15 seconds in length, so I picked a music file off my machine to show the loading progress bar.</p>
+        <p class="exampleLink"><a href="examples/audio_player/" target="_blank">Explore this example</a></p>
+      </div>
+    </div>
+
+    <div id="politicalExample" class="exampleItem">
+      <span class="date">May 27th, 2010 - Sept 10th, 2010</span>
+      <h4 class="contentHeader">City Councilor Site <small>Bring change: <span class="glyphicon glyphicon-ok"></span></small></h4>
+      <div class="exampleDetails">
+        <div class="exampleStats">
+          <span class="technologies"><span class="prefix">Using:</span> HTML, CSS, Javascript and PHP with MySQL Database Connectivity</span>
+        </div>
+        <p>I was requested to create a political site for a friend's father for his run for a City Councilor of Ottawa position. The site would be a venue for him to express his campaign and provide any news or guest appearances that he made. I provided an Admin Section for any oversight needed on mailing lists, sending a mail to any 'followers' and any other feature he requested. The website went through a few stages of development until the he withdrew from the campaign.</p>
+        <p>To accomplish what was requested of me, I made use of HTML, CSS and Javascript to design the look and feel of the website and I used PHP to hook into a database to hold onto all the mailing list recipients. In the Admin Section I made use of PHP so he could send a mass e-mail out to all that signed up for the mailing list, as well as the ability to remove any bogus or unwanted recipients.</p>
+        <p class="exampleLink disabled">Unfortunately no link is available at this time.</p>
+      </div>
+    </div>
   </div>
 
   <div class="page" id="about">
     <h2 class="subPageHeader">About <small>Work Experiences &amp; Technical Knowledge</small></h2>
-    <p>Coming Soon</p>
+    <h4 class="contentHeader">Technical Knowledge</h4>
+    <p>The following is a overview list of the main things I have had experience with over the last 10-12 years of development experience
+    through various different projects (personal and professional).</p>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3">UI/UX</div>
+        <div class="col-sm-3">JavaScript</div>
+        <div class="col-sm-3">Html5 Canvas</div>
+        <div class="col-sm-3">CSS 2/3</div>
+        <div class="col-sm-3">Git</div>
+        <div class="col-sm-3">Mercurial</div>
+        <div class="col-sm-3">SVN</div>
+        <div class="col-sm-3">Browser Support</div>
+        <div class="col-sm-3">Internationalization</div>
+        <div class="col-sm-3">NodeJS</div>
+        <div class="col-sm-3">Build Processes</div>
+        <div class="col-sm-3">MVC</div>
+        <div class="col-sm-3">Java</div>
+        <div class="col-sm-3">Package/Dependency Managers</div>
+        <div class="col-sm-3">Linux</div>
+        <div class="col-sm-3">DBs (Oracle, MySQL)</div>
+        <div class="col-sm-3">PHP</div>
+      </div>
+    </div>
+    <p>More pointedly, these are the JavaScript/Front-End frameworks I am familiar with and use regularly (or once did).</p>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4">MicroSoft's <a href="http://www.typescriptlang.org/" class="externalLink" target="_blank">TypeScript <span class="glyphicon glyphicon-new-window"></span></a></div>
+        <div class="col-sm-4"><a href="http://createjs.com/" class="externalLink" target="_blank">CreateJS <span class="glyphicon glyphicon-new-window"></span></a> (Four Library Bundle)</div>
+        <div class="col-sm-4"><a href="http://sass-lang.com/" class="externalLink" target="_blank">SASS <span class="glyphicon glyphicon-new-window"></span></a></div>
+        <div class="col-sm-4"><a href="http://getbootstrap.com/" class="externalLink" target="_blank">Bootstrap <span class="glyphicon glyphicon-new-window"></span></a></div>
+        <div class="col-sm-4"><a href="https://jquery.com/" class="externalLink" target="_blank">jQuery <span class="glyphicon glyphicon-new-window"></span></a></div>
+        <div class="col-sm-4"><a href="https://jquerymobile.com/" class="externalLink" target="_blank">jQuery Mobile <span class="glyphicon glyphicon-new-window"></span></a></div>
+        <div class="col-sm-4"><a href="http://handlebarsjs.com/" class="externalLink" target="_blank">Handlebars <span class="glyphicon glyphicon-new-window"></span></a></div>
+        <div class="col-sm-4">Sencha's <a href="https://www.sencha.com/products/extjs/" class="externalLink" target="_blank">ExtJS <span class="glyphicon glyphicon-new-window"></span></a></div>
+        <div class="col-sm-4">Facebook's <a href="https://facebook.github.io/react/" class="externalLink" target="_blank">React <span class="glyphicon glyphicon-new-window"></span></a> (currently learning)</div>
+      </div>
+    </div>
+    <h4 class="contentHeader">Work Experience</h4>
+    <ul class="workHistory">
+      <li class="workDataPoint">
+        <span class="name"><span class="title">Vectorface</span> <span class="classification">Full-Time</span></span>
+        <span class="role">JavaScript Developer</span>
+        <span class="dates">November 2013 - Present</span>
+        <span class="technologies">JavaScript, HTML 5 Canvas, CSS 3</span>
+        <span class="libraries">Using
+          <span>createjs</span>,
+          <span>jQuery</span>,
+          <span>jQuery Mobile</span>,
+          <span>Bootstrap</span>,
+          <span>Handlebars</span>,
+          <span>TypeScript</span>,
+          <span>SASS</span>
+        </span>
+      </li>
+      <li class="workDataPoint">
+        <span class="name"><span class="title">Halogen Software</span> <span class="classification">Full-Time</span></span>
+        <span class="role">Software Developer</span>
+        <span class="dates">April 2012 - November 2013</span>
+        <span class="technologies">Java, JSP, HTML 4, CSS 2, JavaScript</span>
+        <span class="libraries">Using
+          <span>ExtJs 3.2.1</span>
+        </span>
+      </li>
+      <li class="workDataPoint">
+        <span class="name"><span class="title">University of Windsor</span> <span class="classification">Renewed Contact</span></span>
+        <span class="role">Course Technician</span>
+        <span class="dates">December 2006 - December 2011</span>
+        <span class="technologies">HTML 4, CSS 2, ActionScript</span>
+      </li>
+    </ul>
   </div>
 
   <div class="page" id="personal">
@@ -99,8 +265,10 @@
     </ul>
   </div>
   <div class="copyNote">Andrew Ballantyne <span class="glyphicon glyphicon-copyright-mark"></span> 2016</div>
-  <div class="footnote">
-    GitHub icon used from <a href="http://glyphicons.com" target="_blank">glyphicon.com <span class="glyphicon glyphicon-new-window"></span></a>
+  <div class="footnote">GitHub icon used from
+    <a href="http://glyphicons.com" class="externalLink" target="_blank">
+      glyphicons.com <span class="glyphicon glyphicon-new-window"></span>
+    </a>
   </div>
 </footer>
 

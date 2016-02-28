@@ -1,0 +1,56 @@
+body {
+	background: url("images/background.png") white repeat;
+}
+
+.center {
+	margin: 0 auto;
+	text-align: center;
+}
+
+#disclaimer {
+	color: black;
+	display: none;
+}
+#disclaimer a {
+	color: blue;
+	font-size: 8pt;
+	font-weight: normal;
+	text-decoration: none;
+	vertical-align: top;
+}
+#disclaimer a:hover {
+	text-decoration: underline;
+}
+
+#disclaimerShow a {
+	color: black;
+	font-style: italic;
+	text-decoration: none;
+}
+#disclaimerShow a:hover {
+	color: blue;
+	text-decoration: underline;
+}
+
+#footer {
+	padding: 5px;
+}
+
+.name {
+	color: black;
+	font-weight: bold;
+	text-decoration: underline;
+}
+.name:hover {
+	color: blue;
+}
+
+.superscript {
+	font-size: 8pt;
+	font-weight: normal;
+	vertical-align: top;
+}
+
+.testedWith {
+	padding: 5px;
+}

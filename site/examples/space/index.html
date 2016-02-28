@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Space - The Final Frontier</title>
+	<link rel="stylesheet" href="styles.css" />
+	<script src="CanvasAPI/Utilities/_Math.js"></script>
+	<script src="CanvasAPI/Utilities/_Font.js"></script>
+	<script src="CanvasAPI/Utilities/BPoint.js"></script>
+	<script src="CanvasAPI/Utilities/BColor.js"></script>
+	<script src="CanvasAPI/Utilities/BText.js"></script>
+	<script src="CanvasAPI/Utilities/GraphicalText.js"></script>
+	<script src="CanvasAPI/Controls/BButton.js"></script>
+	<script src="CanvasAPI/Controls/CanvasWin.js"></script>
+	<script src="CanvasAPI/Controls/PanelSlide.js"></script>
+	<script src="CanvasAPI/Controls/Slider.js"></script>
+	<script src="CanvasAPI/Space/SpaceGlobals.js"></script>
+	<script src="CanvasAPI/Space/SpaceRing.js"></script>
+	<script src="CanvasAPI/Space/AsteroidRing.js"></script>
+	<script src="CanvasAPI/Space/Planet.js"></script>
+	<script src="CanvasAPI/Space/OrbitRing.js"></script>
+	<script src="CanvasAPI/Space/SolarSystem.js"></script>
+	<script src="CanvasAPI/Space/SpaceCanvasWin.js"></script>
+
+	<script src="CanvasAPI/PreLoad/PreLoader.js"></script>
+</head>
+<body>
+<script>
+window.addEventListener('load',preLoad,false);
+
+/**
+ * Preloads the images.
+ *
+ * @param e {event} The event handler
+ */
+function preLoad ( e ) {
+	// Configure all the images in this project
+	var imageList = new Array();
+	imageList[0] = "images/asteroidRing.png";
+	imageList[1] = "images/bgImage.png";
+	imageList[2] = "images/earth.png";
+	imageList[3] = "images/jupiter.png";
+	imageList[4] = "images/mars.png";
+	imageList[5] = "images/mercury.png";
+	imageList[6] = "images/neptune.png";
+	imageList[7] = "images/saturn.png";
+	imageList[8] = "images/sun.png";
+	imageList[9] = "images/uranus.png";
+	imageList[10] = "images/venus.png";
+	imageList[11] = "images/sliderPlanet.png";
+
+	// Create the preloader object
+	var loader = new PreLoader( imageList, 'spaceCanvas' );
+
+	// Set interval to
+	var interval = setInterval( intervalTick, 333 ); // 1:3rd of a second
+
+	function intervalTick ( ) {
+		var breakStatus = loader.intervalTick();
+		if ( breakStatus ) {
+			clearInterval(interval);
+			onLoad( loader );
+		}
+	}
+}
+
+/**
+ * Event Handler for the page load.
+ *
+ * @param preLoader {PreLoader} The preloader object holding onto the already loaded image data
+ */
+function onLoad ( preLoader ) {
+	var m_focus = null; // which canvas has focus
+	var m_timerSpeed = 50; // 1:20th of a second
+	var m_timerOn = true;
+
+	// Create a list of canvas'
+	var m_canvasList = new Array();
+	m_canvasList[0] = new SpaceCanvasWin( 'spaceCanvas', preLoader );
+
+	// Add listeners/timers (attached to window for multiple canvas')
+	window.setInterval( rotationTick, m_timerSpeed ); // controls all motion
+	window.addEventListener('mousedown', onMouseDown, false);
+	window.addEventListener('mouseup', onMouseUp, false);
+	window.addEventListener('mousemove', onMouseMove, false);
+	window.addEventListener('touchstart', onMouseDown, false);
+	window.addEventListener('touchend', onMouseUp, false);
+	window.addEventListener('touchmove', onMouseMove, false);
+	window.addEventListener('DOMMouseScroll', onMouseScroll, false);
+	window.onmousewheel = document.onmousewheel = onMouseScroll; // IE
+
+	/**
+	 * Global paint for all the canvas'.
+	 */
+	function paint ( ) {
+		for ( var i=0; i<m_canvasList.length; i++ )
+			m_canvasList[i].paint();
+	}
+
+	/**
+	 * Handles the timer tick.
+	 */
+	function rotationTick ( ) {
+		for ( var i=0; i<m_canvasList.length; i++ )
+			m_canvasList[i].timerTick( m_timerOn ? m_timerSpeed : 0 );
+
+		paint();
+	}
+	/**
+	 * Event handler for the left mouse press down.
+	 *
+	 * @param e {event} The event handler
+	 */
+	function onMouseDown ( e ) {
+		for ( var i=0; i<m_canvasList.length; i++ ) {
+			if ( m_canvasList[i].mouseDown( e ) ) {
+				m_focus = i;
+				break;
+			}
+			else {
+				m_focus = null;
+			}
+		}
+
+		paint();
+	}
+	/**
+	 * Event handler for the left mouse press up.
+	 *
+	 * @param e {event} The event handler
+	 */
+	function onMouseUp ( e ) {
+		var returnCall = null;
+		for ( var i=0; i<m_canvasList.length; i++ )
+			returnCall = m_canvasList[i].mouseUp( e );
+
+		if ( returnCall == "timer" )
+			m_timerOn = !m_timerOn;
+
+		paint();
+	}
+	/**
+	 * Event handler for the mouse move.
+	 *
+	 * @param e {event} The event handler
+	 */
+	function onMouseMove ( e ) {
+		for ( var i=0; i<m_canvasList.length; i++ )
+			m_canvasList[i].mouseMove( e );
+	}
+	/**
+	 * Event handler for the mouse scroll wheel.
+	 *
+	 * @param e {event} The event handler
+	 */
+	function onMouseScroll ( e ) {
+		if ( m_focus != null ) {
+			e.stopPropagation();
+			e.preventDefault();
+			e.cancelBubble = true;
+			m_canvasList[m_focus].mouseScroll( e );
+			paint();
+		}
+	}
+
+	// Render the canvas'
+//	paint();
+}
+
+/**
+ * Change the display visibility on div containers.
+ *
+ * @param thisDiv {String} The div ID for the div you want to hide
+ * @param targetDiv {String} The div ID for the div you want to show
+ */
+function showDiv ( thisDiv, targetDiv ) {
+	if ( thisDiv != undefined ) // safety check
+		document.getElementById( thisDiv ).style.display = "none";
+	if ( targetDiv != undefined ) // safety check
+		document.getElementById( targetDiv ).style.display = "block";
+}
+</script>
+
+<div class="center">
+	<h1>The Solar System</h1>
+	<canvas id="spaceCanvas" height="612" width="1024">Your browser unfortunately doesn't support Canvas. Consider getting the latest version of the browsers listed below:</canvas>
+	<div id="footer">
+		<div class="testedWith">Tested with <a class="name" href="http://www.mozilla.org/en-US/firefox/new/" target="_blank" title="Version 9">Mozilla Firefox</a><span class="superscript">(v9)</span>, <a class="name" href="http://windows.microsoft.com/en-CA/internet-explorer/products/ie/home" target="_blank" title="Version 9">Microsoft Internet Explorer</a><span class="superscript">(v9)</span>, and <a class="name" href="https://www.google.com/chrome/" target="_blank" title="Version 16">Google Chrome</a><span class="superscript">(v16)</span>.</div>
+		<div id="disclaimerShow" title="Disclaimer Message; Click to view..."><a href="#disclaimer" onclick="showDiv('disclaimerShow', 'disclaimer');">Disclaimer</a></div>
+		<div id="disclaimer">I do not own these images. Gathered using Google Images<a href="http://www.youtoart.com/html/Icon/Other/6359.html" target="_blank" title="Planets">[1]</a><a href="http://www.turbosquid.com/3d-models/3ds-max-asteroids/300100" target="_blank" title="Asteroids">[2]</a><a href="http://jootix.com/view/859/Hubble-Orion-Nebula-hubble-orion-nebula-1600x1200.html" target="_blank" title="Nebula Background">[3]</a></div>
+	</div>
+</div>
+
+</body>
+</html>

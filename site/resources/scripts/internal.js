@@ -6,6 +6,12 @@ var _data = {
   window: $(window),
   /** @type {jQuery} -- The main content container for all the page-data */
   content: null,
+  examples: {
+    /** @type {jQuery} -- All the example navs */
+    allNavs: null,
+    /** @type {jQuery} -- All the example content containers */
+    allContents: null
+  },
   navigation: {
     /** @type {jQuery} -- Main navigation container */
     mainNavContainer: null,
@@ -40,9 +46,9 @@ var _data = {
 _data.window.on('load', function () {
   setupVariables();
 
-  setupInitialContent();
-
   setupNavigation();
+
+  setupExamples();
 });
 
 
@@ -63,15 +69,22 @@ function setupVariables() {
   _data.pages.about = _data.content.find('#about');
   _data.pages.personal = _data.content.find('#personal');
   _data.pages.contact = _data.content.find('#contact');
-}
 
-function setupInitialContent() {
-
+  _data.examples.allNavs = _data.pages.examples.find('#exampleNav').children();
+  _data.examples.allContents = _data.pages.examples.find('.exampleItem');
 }
 
 function setupNavigation() {
+  // Nav active class change
+  _data.navigation.all.on('click', function () {
+    _data.navigation.all.removeClass('active');
+
+    $(this).addClass('active');
+  });
+
   // Hash Change
   _data.window.on('hashchange', handleHashChange);
+  _data.pages.home.removeClass('active');
   handleHashChange();
   function handleHashChange() {
     var hash = location.hash.substr(1);
@@ -108,11 +121,15 @@ function setupNavigation() {
       console.error("Error finding nav to update");
     }
   }
+}
 
-  // Nav active class change
-  _data.navigation.all.on('click', function () {
-    _data.navigation.all.removeClass('active');
+function setupExamples() {
+  _data.examples.allNavs.on('click', function () {
+    _data.examples.allNavs.removeClass('active');
+    _data.examples.allContents.hide();
 
-    $(this).addClass('active');
+    var thisNav = $(this);
+    thisNav.addClass('active');
+    $('#' + thisNav.attr('data-content')).show();
   });
 }
