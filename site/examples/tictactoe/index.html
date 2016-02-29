@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tic Tac Toe</title>
+  <script type="text/javascript" src="bin/scripts/external.min.js"></script>
+  <script type="text/javascript" src="bin/scripts/internal.js"></script>
+
+  <link rel="stylesheet" href="bin/styles/external.min.css" />
+  <link rel="stylesheet" href="bin/styles/internal.css" />
+</head>
+<body>
+
+<header class="page-header gameHeader">
+  <button id="newGameBtn" class="btn btn-primary controlBtn" title="Starts a new game, and randoms the starting player">New Game</button>
+  <button id="resetDataBtn" class="btn btn-primary controlBtn" title="Triggers a New Game as well as resets all data">Reset Data</button>
+  <h1>Tic Tac Toe</h1>
+</header>
+
+<div class="contentContainer container-fluid">
+  <div class="row">
+    <div class="col-sm-3 stateContainer">
+      <h1>Current Player</h1>
+      <h1 id="currentPlayer" class="activePlayerPane"></h1>
+    </div>
+    <div class="col-sm-6 gameBoardContainer">
+      <div class="row">
+        <div class="col-sm-4 gameCell">
+          <button class="gameSquare" data-coordinate="A1">&nbsp;</button>
+        </div>
+        <div class="col-sm-4 gameCell">
+          <button class="gameSquare" data-coordinate="A2">&nbsp;</button>
+        </div>
+        <div class="col-sm-4 gameCell">
+          <button class="gameSquare" data-coordinate="A3">&nbsp;</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 gameCell">
+          <button class="gameSquare" data-coordinate="B1">&nbsp;</button>
+        </div>
+        <div class="col-sm-4 gameCell">
+          <button class="gameSquare" data-coordinate="B2">&nbsp;</button>
+        </div>
+        <div class="col-sm-4 gameCell">
+          <button class="gameSquare" data-coordinate="B3">&nbsp;</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 gameCell">
+          <button class="gameSquare" data-coordinate="C1">&nbsp;</button>
+        </div>
+        <div class="col-sm-4 gameCell">
+          <button class="gameSquare" data-coordinate="C2">&nbsp;</button>
+        </div>
+        <div class="col-sm-4 gameCell">
+          <button class="gameSquare" data-coordinate="C3">&nbsp;</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3 scoreContainer">
+      <div id="oPlayer">
+        <h1><span class="glyphicon glyphicon-certificate"></span> Score</h1>
+        <h2 class="playerScore">0</h2>
+      </div>
+      <div id="xPlayer">
+        <h1><span class="glyphicon glyphicon-remove"></span> Score</h1>
+        <h2 class="playerScore">0</h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="version">v1.0</div>
+  <div class="copyright">Andrew Ballatnyne <span class="glyphicon glyphicon-copyright-mark"></span> 2016</div>
+</footer>
+
+</body>
+</html>
