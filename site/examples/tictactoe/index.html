@@ -20,8 +20,10 @@
 <div class="contentContainer container-fluid">
   <div class="row">
     <div class="col-sm-3 stateContainer">
-      <h1>Current Player</h1>
-      <h1 id="currentPlayer" class="activePlayerPane"></h1>
+      <div class="well">
+        <h1>Current Player</h1>
+        <h1 id="currentPlayer" class="activePlayerPane"></h1>
+      </div>
     </div>
     <div class="col-sm-6 gameBoardContainer">
       <div class="row">
@@ -59,20 +61,28 @@
       </div>
     </div>
     <div class="col-sm-3 scoreContainer">
-      <div id="oPlayer">
-        <h1><span class="glyphicon glyphicon-certificate"></span> Score</h1>
-        <h2 class="playerScore">0</h2>
+      <div id="totalGames" class="well valueContainer">
+        <h1 class="header">Total Games</h1>
+        <h2 class="value">0</h2>
       </div>
-      <div id="xPlayer">
-        <h1><span class="glyphicon glyphicon-remove"></span> Score</h1>
-        <h2 class="playerScore">0</h2>
+      <div id="oPlayer" class="well valueContainer">
+        <h1 class="header"><span class="glyphicon glyphicon-certificate"></span> Score</h1>
+        <h2 class="value">0</h2>
+      </div>
+      <div id="xPlayer" class="well valueContainer">
+        <h1 class="header"><span class="glyphicon glyphicon-remove"></span> Score</h1>
+        <h2 class="value">0</h2>
+      </div>
+      <div id="ties" class="well valueContainer">
+        <h1 class="header">Ties</h1>
+        <h2 class="value">0</h2>
       </div>
     </div>
   </div>
 </div>
 
 <footer>
-  <div class="version">v1.0</div>
+  <div class="version">v1.1</div>
   <div class="copyright">Andrew Ballatnyne <span class="glyphicon glyphicon-copyright-mark"></span> 2016</div>
 </footer>
 

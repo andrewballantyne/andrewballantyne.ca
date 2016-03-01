@@ -35,6 +35,10 @@ body .contentContainer .gameBoardContainer {
       background-color: lightgreen; }
 body .contentContainer .scoreContainer {
   text-align: center; }
+  body .contentContainer .scoreContainer .valueContainer {
+    padding: 0; }
+    body .contentContainer .scoreContainer .valueContainer .header {
+      border-bottom: 1px solid #ccc; }
 body footer {
   background-color: #fff;
   border-top: 1px solid #eee;

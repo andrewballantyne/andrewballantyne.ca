@@ -2,11 +2,12 @@
 var GameState = (function () {
     function GameState() {
         this.currentPlayer = null;
-        this.grid = null;
+        this.grid = {};
         this.victoryPossibilities = null;
         this.victoryPath = null;
         this.playerChangeNotifiers = [];
         this.gameChangeNotifiers = [];
+        this.availableSpaces = 0;
         this.setupRandomPlayer();
         this.setupGrid();
         this.setupVictoryPossibilities();
@@ -28,6 +29,7 @@ var GameState = (function () {
     };
     GameState.prototype.registerClick = function (coordinate) {
         this.grid[coordinate] = this.currentPlayer;
+        this.availableSpaces--;
         this.validate();
     };
     GameState.prototype.switchPlayer = function () {
@@ -70,7 +72,6 @@ var GameState = (function () {
         this.currentPlayer = PlayerType[PlayerType[Math.floor(Math.random() * Players.PLAYER_COUNT)]];
     };
     GameState.prototype.setupGrid = function () {
-        this.grid = {};
         this.grid["A1"] = null;
         this.grid["A2"] = null;
         this.grid["A3"] = null;
@@ -80,6 +81,7 @@ var GameState = (function () {
         this.grid["C1"] = null;
         this.grid["C2"] = null;
         this.grid["C3"] = null;
+        this.availableSpaces = 9;
     };
     GameState.prototype.setupVictoryPossibilities = function () {
         this.victoryPossibilities = [[]];
@@ -122,6 +124,11 @@ var GameState = (function () {
             this.victoryPath = victoryPath;
             this.notifyForPlayerChange(victor, true);
         }
+        else if (this.availableSpaces <= 0) {
+            console.warn("Victor Determined: No One");
+            this.victoryPath = null;
+            this.notifyForPlayerChange(null, true);
+        }
     };
     GameState.prototype.reset = function () {
         this.victoryPath = null;
@@ -155,6 +162,7 @@ var Players = (function () {
         Players.score = {};
         Players.score[PlayerType.O_PLAYER] = 0;
         Players.score[PlayerType.X_PLAYER] = 0;
+        Players.score[PlayerType.TIE_PLAYER] = 0;
     };
     Players.getPlayerSymbol = function (player) {
         return Players.playerMapping[player];
@@ -163,7 +171,12 @@ var Players = (function () {
         return Players.score[player];
     };
     Players.playerWon = function (player) {
-        Players.score[player]++;
+        if (player === null) {
+            Players.score[PlayerType.TIE_PLAYER]++;
+        }
+        else {
+            Players.score[player]++;
+        }
     };
     Players.resetPlayerScores = function () {
         Players.score[PlayerType.O_PLAYER] = 0;
@@ -177,6 +190,7 @@ var PlayerType;
 (function (PlayerType) {
     PlayerType[PlayerType["X_PLAYER"] = 0] = "X_PLAYER";
     PlayerType[PlayerType["O_PLAYER"] = 1] = "O_PLAYER";
+    PlayerType[PlayerType["TIE_PLAYER"] = 2] = "TIE_PLAYER";
 })(PlayerType || (PlayerType = {}));
 /// <reference path="../refAll.d.ts" />
 var StateType;
@@ -225,9 +239,13 @@ var CellWatcher = (function (_super) {
     };
     CellWatcher.prototype.playerStateChanged = function (player, victor) {
         if (victor) {
-            this.disable(this.gameSquares);
-            var victoryPath = this.gameState.getVictoryPath();
-            this.highlightVictoryPath(victoryPath);
+            if (player != null) {
+                this.disable(this.gameSquares);
+                var victoryPath = this.gameState.getVictoryPath();
+                this.highlightVictoryPath(victoryPath);
+            }
+            else {
+            }
         }
         else {
         }
@@ -245,6 +263,10 @@ var CellWatcher = (function (_super) {
         }
     };
     CellWatcher.prototype.highlightVictoryPath = function (victoryPath) {
+        if (victoryPath == null) {
+            console.error("Victory path is null; no winner, cannot highlight path");
+            return;
+        }
         for (var i = 0; i < victoryPath.length; i++) {
             var selector = '[data-coordinate=' + victoryPath[i] + ']';
             this.gameSquares.find(selector).addBack(selector).addClass('winningSquare');
@@ -279,8 +301,10 @@ var GameDetails = (function (_super) {
         this.currentPlayerPane = $('#currentPlayer');
         this.newGameBtn = $('#newGameBtn');
         this.resetDataBtn = $('#resetDataBtn');
-        this.oPlayerScore = $('#oPlayer').find('.playerScore');
-        this.xPlayerScore = $('#xPlayer').find('.playerScore');
+        this.totalGamesPlayed = $('#totalGames').find('.value');
+        this.oPlayerScore = $('#oPlayer').find('.value');
+        this.xPlayerScore = $('#xPlayer').find('.value');
+        this.tiesScore = $('#ties').find('.value');
         this.setupListeners();
         this.updatePlayer(this.gameState.getCurrentPlayer());
     }
@@ -322,8 +346,14 @@ var GameDetails = (function (_super) {
         this.currentPlayerPane.append(this.getSelectionContent(Players.getPlayerSymbol(player)));
     };
     GameDetails.prototype.updateScore = function () {
-        this.oPlayerScore.text(Players.getPlayerScore(PlayerType.O_PLAYER));
-        this.xPlayerScore.text(Players.getPlayerScore(PlayerType.X_PLAYER));
+        var oScore = Players.getPlayerScore(PlayerType.O_PLAYER);
+        var xScore = Players.getPlayerScore(PlayerType.X_PLAYER);
+        var tied = Players.getPlayerScore(PlayerType.TIE_PLAYER);
+        var total = oScore + xScore + tied;
+        this.totalGamesPlayed.text(total);
+        this.oPlayerScore.text(oScore);
+        this.xPlayerScore.text(xScore);
+        this.tiesScore.text(tied);
     };
     return GameDetails;
 })(AbstractDomTicTacToe);
