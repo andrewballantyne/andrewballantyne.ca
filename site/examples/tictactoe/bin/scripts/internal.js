@@ -122,12 +122,16 @@ var GameState = (function () {
         if (victor !== null) {
             console.warn("Victor Determined: " + PlayerType[victor]);
             this.victoryPath = victoryPath;
+            Players.playerWon(victor);
             this.notifyForPlayerChange(victor, true);
+            this.notifyForGameChange(StateType.GAME_OVER);
         }
         else if (this.availableSpaces <= 0) {
             console.warn("Victor Determined: No One");
             this.victoryPath = null;
+            Players.playerWon(null);
             this.notifyForPlayerChange(null, true);
+            this.notifyForGameChange(StateType.GAME_OVER);
         }
     };
     GameState.prototype.reset = function () {
@@ -145,6 +149,7 @@ var Main = (function () {
         var gameState = new GameState();
         new CellWatcher(gameState);
         new GameDetails(gameState);
+        new DialogHandler(gameState);
     }
     return Main;
 })();
@@ -165,6 +170,8 @@ var Players = (function () {
         Players.score[PlayerType.TIE_PLAYER] = 0;
     };
     Players.getPlayerSymbol = function (player) {
+        if (player == null)
+            return null;
         return Players.playerMapping[player];
     };
     Players.getPlayerScore = function (player) {
@@ -181,6 +188,7 @@ var Players = (function () {
     Players.resetPlayerScores = function () {
         Players.score[PlayerType.O_PLAYER] = 0;
         Players.score[PlayerType.X_PLAYER] = 0;
+        Players.score[PlayerType.TIE_PLAYER] = 0;
     };
     Players.PLAYER_COUNT = 2;
     return Players;
@@ -197,12 +205,33 @@ var StateType;
 (function (StateType) {
     StateType[StateType["NEW_GAME"] = 0] = "NEW_GAME";
     StateType[StateType["RESET_DATA"] = 1] = "RESET_DATA";
+    StateType[StateType["GAME_OVER"] = 2] = "GAME_OVER";
 })(StateType || (StateType = {}));
 /// <reference path="../refAll.d.ts" />
 var AbstractDomTicTacToe = (function () {
     function AbstractDomTicTacToe() {
         this.setupContentDefault();
     }
+    AbstractDomTicTacToe.prototype.setupButtonForConfirmation = function (button, callbackOnFinalTrigger) {
+        var contents = null;
+        button.on('click', function () {
+            if (contents === null) {
+                contents = button.html();
+                button.html('<span class="glyphicon glyphicon-ok"></span> Are you sure?');
+            }
+            else {
+                button.html(contents);
+                contents = null;
+                callbackOnFinalTrigger();
+            }
+        });
+        return function () {
+            if (contents != null) {
+                button.html(contents);
+                contents = null;
+            }
+        };
+    };
     AbstractDomTicTacToe.prototype.getSelectionContent = function (glyphiconName) {
         var thisContent = this.defaultContent.clone();
         thisContent.addClass('glyphicon-' + glyphiconName);
@@ -234,21 +263,7 @@ var CellWatcher = (function (_super) {
             var thisSquare = $(e.currentTarget);
             _this.handleSquareClick(thisSquare);
         });
-        this.gameState.listenForPlayerChanges(this.playerStateChanged, this);
         this.gameState.listenForGameChanges(this.gameStateChanged, this);
-    };
-    CellWatcher.prototype.playerStateChanged = function (player, victor) {
-        if (victor) {
-            if (player != null) {
-                this.disable(this.gameSquares);
-                var victoryPath = this.gameState.getVictoryPath();
-                this.highlightVictoryPath(victoryPath);
-            }
-            else {
-            }
-        }
-        else {
-        }
     };
     CellWatcher.prototype.gameStateChanged = function (gameStateType) {
         switch (gameStateType) {
@@ -257,6 +272,10 @@ var CellWatcher = (function (_super) {
                 break;
             case StateType.RESET_DATA:
                 this.resetSquares();
+                break;
+            case StateType.GAME_OVER:
+                this.disable(this.gameSquares);
+                this.highlightVictoryPath(this.gameState.getVictoryPath());
                 break;
             default:
                 console.error("Missing state setting: " + gameStateType);
@@ -293,6 +312,68 @@ var CellWatcher = (function (_super) {
     return CellWatcher;
 })(AbstractDomTicTacToe);
 /// <reference path="../refAll.d.ts" />
+var DialogHandler = (function (_super) {
+    __extends(DialogHandler, _super);
+    function DialogHandler(gameState) {
+        _super.call(this);
+        this.gameState = gameState;
+        this.gameOverDialog = $('#gameOverDialog');
+        this.gameOverDialogSubTitle = this.gameOverDialog.find('.subTitle');
+        this.modalNewGameBtn = this.gameOverDialog.find('#modalNewGameBtn');
+        this.modalResetDataBtn = this.gameOverDialog.find('#modalResetDataBtn');
+        this.cancelResetDataBtnConfirmation = null;
+        this.setupListeners();
+    }
+    DialogHandler.prototype.setupListeners = function () {
+        var _this = this;
+        this.gameState.listenForPlayerChanges(this.handlePlayerChanges, this);
+        this.gameState.listenForGameChanges(this.handleGameChanges, this);
+        this.modalNewGameBtn.on('click', function () {
+            _this.closeDialog();
+            _this.gameState.newGame();
+        });
+        this.cancelResetDataBtnConfirmation = this.setupButtonForConfirmation(this.modalResetDataBtn, function () {
+            _this.closeDialog();
+            _this.gameState.resetAllData();
+        });
+    };
+    DialogHandler.prototype.handlePlayerChanges = function (player, victor) {
+        if (victor) {
+            this.showGameOverDialog(player);
+        }
+        else {
+        }
+    };
+    DialogHandler.prototype.handleGameChanges = function (gameStateType) {
+        switch (gameStateType) {
+            case StateType.NEW_GAME:
+            case StateType.RESET_DATA:
+                this.closeDialog();
+                break;
+            case StateType.GAME_OVER:
+                break;
+        }
+    };
+    DialogHandler.prototype.showGameOverDialog = function (victoryPlayer) {
+        this.gameOverDialogSubTitle.empty();
+        if (victoryPlayer != null) {
+            this.gameOverDialogSubTitle.append(this.getSelectionContent(Players.getPlayerSymbol(victoryPlayer)));
+            this.gameOverDialogSubTitle.append(" Player Wins!");
+        }
+        else {
+            this.gameOverDialogSubTitle.append("Tie - No Victor");
+        }
+        this.gameOverDialog.modal({
+            backdrop: 'static'
+        });
+    };
+    DialogHandler.prototype.closeDialog = function () {
+        this.cancelResetDataBtnConfirmation();
+        this.gameOverDialog.modal('hide');
+    };
+    return DialogHandler;
+})(AbstractDomTicTacToe);
+/// <reference path="../refAll.d.ts" />
 var GameDetails = (function (_super) {
     __extends(GameDetails, _super);
     function GameDetails(gameState) {
@@ -301,40 +382,46 @@ var GameDetails = (function (_super) {
         this.currentPlayerPane = $('#currentPlayer');
         this.newGameBtn = $('#newGameBtn');
         this.resetDataBtn = $('#resetDataBtn');
+        this.cancelResetDataBtnConfirmation = null;
         this.totalGamesPlayed = $('#totalGames').find('.value');
         this.oPlayerScore = $('#oPlayer').find('.value');
         this.xPlayerScore = $('#xPlayer').find('.value');
         this.tiesScore = $('#ties').find('.value');
         this.setupListeners();
         this.updatePlayer(this.gameState.getCurrentPlayer());
+        this.updateScore();
     }
     GameDetails.prototype.setupListeners = function () {
         var _this = this;
         this.gameState.listenForPlayerChanges(this.playerDataChanged, this);
         this.gameState.listenForGameChanges(this.gameDataChanged, this);
         this.newGameBtn.on('click', function () {
+            _this.cancelResetDataBtnConfirmation();
             _this.gameState.newGame();
         });
-        this.resetDataBtn.on('click', function () {
+        this.cancelResetDataBtnConfirmation = this.setupButtonForConfirmation(this.resetDataBtn, function () {
             _this.gameState.resetAllData();
         });
     };
     GameDetails.prototype.playerDataChanged = function (player, victor) {
+        this.cancelResetDataBtnConfirmation();
         if (victor) {
-            Players.playerWon(player);
-            this.updateScore();
         }
         else {
             this.updatePlayer(player);
         }
     };
     GameDetails.prototype.gameDataChanged = function (gameStateType) {
+        this.cancelResetDataBtnConfirmation();
         switch (gameStateType) {
             case StateType.NEW_GAME:
                 this.updatePlayer(this.gameState.getCurrentPlayer());
                 break;
             case StateType.RESET_DATA:
                 this.updatePlayer(this.gameState.getCurrentPlayer());
+                this.updateScore();
+                break;
+            case StateType.GAME_OVER:
                 this.updateScore();
                 break;
             default:
@@ -348,12 +435,20 @@ var GameDetails = (function (_super) {
     GameDetails.prototype.updateScore = function () {
         var oScore = Players.getPlayerScore(PlayerType.O_PLAYER);
         var xScore = Players.getPlayerScore(PlayerType.X_PLAYER);
-        var tied = Players.getPlayerScore(PlayerType.TIE_PLAYER);
-        var total = oScore + xScore + tied;
+        var tieScore = Players.getPlayerScore(PlayerType.TIE_PLAYER);
+        var total = oScore + xScore + tieScore;
+        var oScorePercent = 0;
+        var xScorePercent = 0;
+        var tieScorePercent = 0;
+        if (total > 0) {
+            oScorePercent = oScore / total;
+            xScorePercent = xScore / total;
+            tieScorePercent = tieScore / total;
+        }
         this.totalGamesPlayed.text(total);
-        this.oPlayerScore.text(oScore);
-        this.xPlayerScore.text(xScore);
-        this.tiesScore.text(tied);
+        this.oPlayerScore.text(oScore + " (" + (oScorePercent * 100).toFixed(1) + "%)");
+        this.xPlayerScore.text(xScore + " (" + (xScorePercent * 100).toFixed(1) + "%)");
+        this.tiesScore.text(tieScore + " (" + (tieScorePercent * 100).toFixed(1) + "%)");
     };
     return GameDetails;
 })(AbstractDomTicTacToe);

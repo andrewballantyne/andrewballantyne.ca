@@ -1,10 +1,35 @@
-body .controlBtn {
-  margin: 0 20px;
-  padding: 10px 40px; }
-body #newGameBtn {
+.leftPositioned {
   float: left; }
-body #resetDataBtn {
+
+.rightPositioned {
   float: right; }
+
+.clearPositioning {
+  clear: both; }
+
+.centerAligned {
+  text-align: center; }
+
+body * {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none; }
+body .bigButton {
+  font-size: 200%;
+  padding: 25px; }
+body .absoluteControls {
+  display: inline; }
+  body .absoluteControls .controlBtn {
+    padding: 10px 40px; }
+  body .absoluteControls .topLeftCorner {
+    position: absolute;
+    top: 10px;
+    left: 10px; }
+  body .absoluteControls .topRightCorner {
+    position: absolute;
+    top: 10px;
+    right: 10px; }
 body .gameHeader {
   margin-top: 20px;
   text-align: center; }
@@ -39,6 +64,8 @@ body .contentContainer .scoreContainer {
     padding: 0; }
     body .contentContainer .scoreContainer .valueContainer .header {
       border-bottom: 1px solid #ccc; }
+body .modalContainer .subTitle {
+  display: block; }
 body footer {
   background-color: #fff;
   border-top: 1px solid #eee;
@@ -53,3 +80,4 @@ body footer {
     float: right; }
   body footer .copyright {
     color: #aaa; }
+

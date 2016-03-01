@@ -11,9 +11,16 @@
 </head>
 <body>
 
+<div class="absoluteControls">
+  <button id="newGameBtn" class="btn btn-primary controlBtn topLeftCorner" title="Starts a new game, and randoms the starting player">
+    New Game
+  </button>
+  <button id="resetDataBtn" class="btn btn-danger controlBtn topRightCorner" title="Triggers a New Game as well as resets all data">
+    Reset Data
+  </button>
+</div>
+
 <header class="page-header gameHeader">
-  <button id="newGameBtn" class="btn btn-primary controlBtn" title="Starts a new game, and randoms the starting player">New Game</button>
-  <button id="resetDataBtn" class="btn btn-primary controlBtn" title="Triggers a New Game as well as resets all data">Reset Data</button>
   <h1>Tic Tac Toe</h1>
 </header>
 
@@ -81,8 +88,33 @@
   </div>
 </div>
 
+<div class="modalContainer">
+  <div id="gameOverDialog" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h1 class="modal-title centerAligned">
+            Game Over
+            <small class="subTitle"></small>
+          </h1>
+        </div>
+        <div class="modal-body centerAligned">
+          <button id="modalNewGameBtn" class="btn btn-success bigButton">
+            Another Game
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button id="modalResetDataBtn" type="button" class="btn btn-danger leftPositioned">Reset Data</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <footer>
-  <div class="version">v1.1</div>
+  <div class="version">v1.2</div>
   <div class="copyright">Andrew Ballatnyne <span class="glyphicon glyphicon-copyright-mark"></span> 2016</div>
 </footer>
 
