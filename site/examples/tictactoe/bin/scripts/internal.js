@@ -2,13 +2,15 @@
 var GameState = (function () {
     function GameState() {
         this.currentPlayer = null;
+        this.randomPlayer = false;
+        this.lastSelectedPlayer = null;
         this.grid = {};
         this.victoryPossibilities = null;
         this.victoryPath = null;
         this.playerChangeNotifiers = [];
         this.gameChangeNotifiers = [];
         this.availableSpaces = 0;
-        this.setupRandomPlayer();
+        this.selectPlayer();
         this.setupGrid();
         this.setupVictoryPossibilities();
     }
@@ -47,6 +49,9 @@ var GameState = (function () {
         }
         return this.victoryPossibilities[this.victoryPath];
     };
+    GameState.prototype.setNewGamePlayerRandom = function (makeRandom) {
+        this.randomPlayer = makeRandom;
+    };
     GameState.prototype.resetAllData = function () {
         Players.resetPlayerScores();
         this.reset();
@@ -68,8 +73,22 @@ var GameState = (function () {
             callbackMapping.callback.apply(callbackMapping.scope, data);
         }
     };
-    GameState.prototype.setupRandomPlayer = function () {
-        this.currentPlayer = PlayerType[PlayerType[Math.floor(Math.random() * Players.PLAYER_COUNT)]];
+    GameState.prototype.selectPlayer = function () {
+        if (this.randomPlayer || this.lastSelectedPlayer === null) {
+            this.currentPlayer = PlayerType[PlayerType[Math.floor(Math.random() * Players.PLAYER_COUNT)]];
+        }
+        else {
+            if (this.lastSelectedPlayer === PlayerType.O_PLAYER) {
+                this.currentPlayer = PlayerType.X_PLAYER;
+            }
+            else if (this.lastSelectedPlayer === PlayerType.X_PLAYER) {
+                this.currentPlayer = PlayerType.O_PLAYER;
+            }
+            else {
+                console.error("Unknown last player.");
+            }
+        }
+        this.lastSelectedPlayer = this.currentPlayer;
     };
     GameState.prototype.setupGrid = function () {
         this.grid["A1"] = null;
@@ -137,7 +156,7 @@ var GameState = (function () {
     GameState.prototype.reset = function () {
         this.victoryPath = null;
         this.setupGrid();
-        this.setupRandomPlayer();
+        this.selectPlayer();
     };
     return GameState;
 })();
@@ -275,7 +294,10 @@ var CellWatcher = (function (_super) {
                 break;
             case StateType.GAME_OVER:
                 this.disable(this.gameSquares);
-                this.highlightVictoryPath(this.gameState.getVictoryPath());
+                var victoryPath = this.gameState.getVictoryPath();
+                if (victoryPath != null) {
+                    this.highlightVictoryPath(victoryPath);
+                }
                 break;
             default:
                 console.error("Missing state setting: " + gameStateType);
@@ -379,13 +401,15 @@ var GameDetails = (function (_super) {
     function GameDetails(gameState) {
         _super.call(this);
         this.gameState = gameState;
-        this.currentPlayerPane = $('#currentPlayer');
         this.newGameBtn = $('#newGameBtn');
+        this.newGameRandomPlayerBtn = $('#newGameRandomPlayerBtn').find('input');
         this.resetDataBtn = $('#resetDataBtn');
         this.cancelResetDataBtnConfirmation = null;
         this.totalGamesPlayed = $('#totalGames').find('.value');
-        this.oPlayerScore = $('#oPlayer').find('.value');
-        this.xPlayerScore = $('#xPlayer').find('.value');
+        this.oPlayerContainer = $('#oPlayer');
+        this.oPlayerScore = this.oPlayerContainer.find('.value');
+        this.xPlayerContainer = $('#xPlayer');
+        this.xPlayerScore = this.xPlayerContainer.find('.value');
         this.tiesScore = $('#ties').find('.value');
         this.setupListeners();
         this.updatePlayer(this.gameState.getCurrentPlayer());
@@ -395,6 +419,10 @@ var GameDetails = (function (_super) {
         var _this = this;
         this.gameState.listenForPlayerChanges(this.playerDataChanged, this);
         this.gameState.listenForGameChanges(this.gameDataChanged, this);
+        this.newGameRandomPlayerBtn.on('change', function (e) {
+            _this.gameState.setNewGamePlayerRandom(_this.newGameRandomPlayerBtn.prop('checked'));
+        });
+        this.gameState.setNewGamePlayerRandom(this.newGameRandomPlayerBtn.prop('checked'));
         this.newGameBtn.on('click', function () {
             _this.cancelResetDataBtnConfirmation();
             _this.gameState.newGame();
@@ -429,8 +457,14 @@ var GameDetails = (function (_super) {
         }
     };
     GameDetails.prototype.updatePlayer = function (player) {
-        this.currentPlayerPane.empty();
-        this.currentPlayerPane.append(this.getSelectionContent(Players.getPlayerSymbol(player)));
+        if (player === PlayerType.O_PLAYER) {
+            this.xPlayerContainer.removeClass('active');
+            this.oPlayerContainer.addClass('active');
+        }
+        else if (player === PlayerType.X_PLAYER) {
+            this.oPlayerContainer.removeClass('active');
+            this.xPlayerContainer.addClass('active');
+        }
     };
     GameDetails.prototype.updateScore = function () {
         var oScore = Players.getPlayerScore(PlayerType.O_PLAYER);

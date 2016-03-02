@@ -12,9 +12,15 @@
 <body>
 
 <div class="absoluteControls">
-  <button id="newGameBtn" class="btn btn-primary controlBtn topLeftCorner" title="Starts a new game, and randoms the starting player">
-    New Game
-  </button>
+  <div class="btn-group topLeftCorner" data-toggle="buttons">
+    <button id="newGameBtn" class="btn btn-primary controlBtn" title="Starts a new game">
+      New Game
+    </button>
+    <label id="newGameRandomPlayerBtn" class="btn btn-primary controlSmallBtn leftDivider"
+           title="Toggles if the starting player is random or the opposite of the last player that started">
+      <input type="checkbox" autocomplete="off"> <span class="glyphicon glyphicon-random"></span>
+    </label>
+  </div>
   <button id="resetDataBtn" class="btn btn-danger controlBtn topRightCorner" title="Triggers a New Game as well as resets all data">
     Reset Data
   </button>
@@ -26,14 +32,8 @@
 
 <div class="contentContainer container-fluid">
   <div class="row">
-    <div class="col-sm-3 stateContainer">
-      <div class="well">
-        <h1>Current Player</h1>
-        <h1 id="currentPlayer" class="activePlayerPane"></h1>
-      </div>
-    </div>
-    <div class="col-sm-6 gameBoardContainer">
-      <div class="row">
+    <div class="col-xs-8 gameBoardContainer">
+      <div class="row gameRow">
         <div class="col-sm-4 gameCell">
           <button class="gameSquare" data-coordinate="A1">&nbsp;</button>
         </div>
@@ -44,7 +44,7 @@
           <button class="gameSquare" data-coordinate="A3">&nbsp;</button>
         </div>
       </div>
-      <div class="row">
+      <div class="row gameRow">
         <div class="col-sm-4 gameCell">
           <button class="gameSquare" data-coordinate="B1">&nbsp;</button>
         </div>
@@ -55,7 +55,7 @@
           <button class="gameSquare" data-coordinate="B3">&nbsp;</button>
         </div>
       </div>
-      <div class="row">
+      <div class="row gameRow">
         <div class="col-sm-4 gameCell">
           <button class="gameSquare" data-coordinate="C1">&nbsp;</button>
         </div>
@@ -67,24 +67,47 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-3 scoreContainer">
-      <div id="totalGames" class="well valueContainer">
-        <h1 class="header">Total Games</h1>
-        <h2 class="value">0</h2>
+    <div class="col-xs-4 scoreContainer">
+      <div id="totalGames" class="statContainer">
+        <div class="marker"></div>
+        <div class="well valueContainer">
+          <h1 class="header">Total Games</h1>
+          <h2 class="value">0</h2>
+        </div>
       </div>
-      <div id="oPlayer" class="well valueContainer">
-        <h1 class="header"><span class="glyphicon glyphicon-certificate"></span> Score</h1>
-        <h2 class="value">0</h2>
+      <div id="oPlayer" class="statContainer active">
+        <div class="marker"><span class="glyphicon glyphicon-chevron-left"></span></div>
+        <div class="well valueContainer">
+          <h1 class="header"><span class="glyphicon glyphicon-certificate"></span> Score</h1>
+          <h2 class="value">0</h2>
+        </div>
       </div>
-      <div id="xPlayer" class="well valueContainer">
-        <h1 class="header"><span class="glyphicon glyphicon-remove"></span> Score</h1>
-        <h2 class="value">0</h2>
+      <div id="xPlayer" class="statContainer">
+        <div class="marker"><span class="glyphicon glyphicon-chevron-left"></span></div>
+        <div class="well valueContainer">
+          <h1 class="header"><span class="glyphicon glyphicon-remove"></span> Score</h1>
+          <h2 class="value">0</h2>
+        </div>
       </div>
-      <div id="ties" class="well valueContainer">
-        <h1 class="header">Ties</h1>
-        <h2 class="value">0</h2>
+      <div id="ties" class="statContainer">
+        <div class="marker"></div>
+        <div class="well valueContainer">
+          <h1 class="header">Ties</h1>
+          <h2 class="value">0</h2>
+        </div>
       </div>
     </div>
+  </div>
+</div>
+
+<noscript>
+  <div class="alert alert-danger" role="alert">
+    Unfortunately this site requires JavaScript to run. Please enable it before reloading.
+  </div>
+</noscript>
+<div class="tooSmallContainer">
+  <div class="alert alert-danger" role="alert">
+    <strong>Oh Snap!</strong> Looks like the developer didn't handle your device size!
   </div>
 </div>
 
@@ -114,7 +137,7 @@
 </div>
 
 <footer>
-  <div class="version">v1.2</div>
+  <div class="version">v1.3</div>
   <div class="copyright">Andrew Ballatnyne <span class="glyphicon glyphicon-copyright-mark"></span> 2016</div>
 </footer>
 

@@ -10,74 +10,135 @@
 .centerAligned {
   text-align: center; }
 
-body * {
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none; }
-body .bigButton {
-  font-size: 200%;
-  padding: 25px; }
-body .absoluteControls {
-  display: inline; }
-  body .absoluteControls .controlBtn {
-    padding: 10px 40px; }
-  body .absoluteControls .topLeftCorner {
-    position: absolute;
-    top: 10px;
-    left: 10px; }
-  body .absoluteControls .topRightCorner {
-    position: absolute;
-    top: 10px;
-    right: 10px; }
-body .gameHeader {
-  margin-top: 20px;
-  text-align: center; }
-body .contentContainer .stateContainer {
-  text-align: center; }
-body .contentContainer .gameBoardContainer {
-  text-align: center; }
-  body .contentContainer .gameBoardContainer .gameCell {
-    border: 1px solid black;
-    display: inline-block;
-    float: none;
-    height: 200px;
-    padding: 0;
-    margin: 2px;
+body {
+  margin-bottom: 50px; }
+  body * {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none; }
+  body .bigButton {
+    font-size: 200%;
+    padding: 25px; }
+  body .absoluteControls {
+    display: inline; }
+    body .absoluteControls .controlBtn {
+      padding: 10px 40px; }
+    body .absoluteControls .controlSmallBtn {
+      padding: 10px 20px; }
+    body .absoluteControls .leftDivider {
+      border-left-width: 3px; }
+    body .absoluteControls .topLeftCorner {
+      position: absolute;
+      top: 10px;
+      left: 10px; }
+    body .absoluteControls .topRightCorner {
+      position: absolute;
+      top: 10px;
+      right: 10px; }
+  body .gameHeader {
+    margin-top: 20px;
+    text-align: center; }
+  body .contentContainer .gameBoardContainer {
+    text-align: center; }
+    body .contentContainer .gameBoardContainer .gameRow {
+      font-size: 0; }
+      body .contentContainer .gameBoardContainer .gameRow .gameCell {
+        border: 1px solid black;
+        display: inline-block;
+        float: none;
+        height: 200px;
+        padding: 0;
+        margin: 2px;
+        text-align: center;
+        width: 200px; }
+        body .contentContainer .gameBoardContainer .gameRow .gameCell .gameSquare {
+          background: #efefef;
+          border: none;
+          box-shadow: inset 1px 1px 5px black;
+          font-size: 72px;
+          height: 100%;
+          outline: none;
+          width: 100%; }
+        body .contentContainer .gameBoardContainer .gameRow .gameCell .gameSquare.disabled {
+          background-color: #fff;
+          box-shadow: none; }
+        body .contentContainer .gameBoardContainer .gameRow .gameCell .gameSquare.winningSquare {
+          background-color: lightgreen; }
+  body .contentContainer .scoreContainer {
+    text-align: center; }
+    body .contentContainer .scoreContainer .statContainer {
+      display: -webkit-flex;
+      display: flex;
+      flex-flow: row; }
+      body .contentContainer .scoreContainer .statContainer .marker {
+        color: #ccc;
+        flex: 0 0 50px;
+        font-size: 42px;
+        padding-top: 8px;
+        text-align: center; }
+      body .contentContainer .scoreContainer .statContainer .valueContainer {
+        border-width: 2px;
+        flex: 1 0 auto;
+        padding: 0; }
+        body .contentContainer .scoreContainer .statContainer .valueContainer .header {
+          border-bottom: 1px solid #ccc; }
+    body .contentContainer .scoreContainer .statContainer.active .marker {
+      color: green; }
+    body .contentContainer .scoreContainer .statContainer.active .valueContainer {
+      background-color: lightgreen;
+      border-color: darkgreen; }
+      body .contentContainer .scoreContainer .statContainer.active .valueContainer .header {
+        border-color: green; }
+  body .tooSmallContainer {
+    display: none; }
+  body .modalContainer .subTitle {
+    display: block; }
+  body footer {
+    background-color: #fff;
+    border-top: 1px solid #eee;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    position: fixed;
     text-align: center;
-    width: 200px; }
-    body .contentContainer .gameBoardContainer .gameCell .gameSquare {
-      background: none;
-      border: none;
-      box-shadow: inset 1px 1px 5px black;
-      font-size: 72px;
-      height: 100%;
-      outline: none;
-      width: 100%; }
-    body .contentContainer .gameBoardContainer .gameCell .gameSquare.disabled {
-      box-shadow: none; }
-    body .contentContainer .gameBoardContainer .gameCell .gameSquare.winningSquare {
-      background-color: lightgreen; }
-body .contentContainer .scoreContainer {
-  text-align: center; }
-  body .contentContainer .scoreContainer .valueContainer {
-    padding: 0; }
-    body .contentContainer .scoreContainer .valueContainer .header {
-      border-bottom: 1px solid #ccc; }
-body .modalContainer .subTitle {
-  display: block; }
-body footer {
-  background-color: #fff;
-  border-top: 1px solid #eee;
-  bottom: 0;
-  left: 0;
-  padding: 10px;
-  position: fixed;
-  text-align: center;
-  width: 100%; }
-  body footer .version {
-    color: #aaa;
-    float: right; }
-  body footer .copyright {
-    color: #aaa; }
+    width: 100%; }
+    body footer .version {
+      color: #aaa;
+      float: right; }
+    body footer .copyright {
+      color: #aaa; }
+
+@media screen and (max-width: 949px) {
+  body .contentContainer .gameBoardContainer .gameRow .gameCell {
+    height: 170px;
+    width: 170px; }
+  body .contentContainer .scoreContainer .statContainer .marker {
+    font-size: 36px; }
+  body .contentContainer .scoreContainer .statContainer .valueContainer .header {
+    font-size: 28px; }
+  body .contentContainer .scoreContainer .statContainer .valueContainer .value {
+    font-size: 20px; } }
+@media screen and (max-width: 799px) {
+  body .contentContainer .gameBoardContainer .gameRow .gameCell {
+    height: 125px;
+    width: 125px; }
+  body .contentContainer .scoreContainer .statContainer .marker {
+    flex: 0 0 30px;
+    font-size: 26px;
+    padding-top: 2px; }
+  body .contentContainer .scoreContainer .statContainer .valueContainer .header {
+    margin: 10px 0;
+    font-size: 18px; }
+  body .contentContainer .scoreContainer .statContainer .valueContainer .value {
+    font-size: 16px; } }
+@media screen and (max-width: 699px) {
+  body {
+    margin: 50px; }
+    body .absoluteControls {
+      display: none; }
+    body .contentContainer {
+      display: none; }
+    body .tooSmallContainer {
+      display: block; } }
 
